@@ -6,8 +6,8 @@ module VGA
 		// Your inputs and outputs here
 		KEY,							// On Board Keys
 		SW,
-        PS2_CLK,
-        PS2_DAT,
+        	PS2_CLK,
+        	PS2_DAT,
 		// The ports below are for the VGA output.  Do not change.
 		VGA_CLK,   						//	VGA Clock
 		VGA_HS,							//	VGA H_SYNC
@@ -21,9 +21,9 @@ module VGA
 
 	input			CLOCK_50;				//	50 MHz
 	input	[3:0]	KEY;
-    input [1:0] SW;
-    input PS2_CLK;
-    input PS2_DAT;
+    	input [1:0] SW;
+    	input PS2_CLK;
+    	input PS2_DAT;
 	wire resetn;
 	assign resetn = SW[0];
 	wire writeEn;
