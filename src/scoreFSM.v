@@ -176,3 +176,40 @@ end
 
 endmodule 
 
+
+module Random (timeUp, reset, mole, enable);
+input timeUp, reset, enable;
+output [1:0]mole;
+reg generated; 
+reg [4:0]LFSR;
+// only generate a random number after time up 
+always @(negedge timeUp, posedge reset)
+begin 
+if (reset)
+LFSR <= 5'b10001;
+else if (!enable)
+LFSR <= 0;
+else 
+LFSR <= {LFSR[3:0], LFSR[4]^LFSR[3]};
+end 
+
+assign mole = LFSR [1:0];
+endmodule 
+
+module ifScore (keyPressed, mole, W, reset, pressedInTime, timeUp);
+input keyPressed, mole, reset,pressedInTime, timeUp;
+output reg W;
+// should only check after a key has been pressed 
+always@(posedge timeUp)
+if (!pressedInTime)
+W = 1'b0;
+else 
+begin
+	if (keyPressed == mole)
+	begin 
+	W = 1'b1;
+	end 
+	else 
+	W = 1'b0;
+end 
+endmodule 
